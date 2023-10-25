@@ -22,14 +22,13 @@ function TableItemRenderer({
 
   const shouldRenderChildren = level < maxLevels && hasChildren;
 
-  console.log(
-    `Level: ${level}, hasChildren: ${hasChildren}, showChildren: ${showChildren}`
-  );
+  // console.log(
+  //   `Level: ${level}, hasChildren: ${hasChildren}, showChildren: ${showChildren}`
+  // );
   const toggleChildren = (id: string) => {
+    console.log("received id " + id);
+
     setSelectedId(id);
-    // console.log("id " + id);
-    // console.log("item.id " + item.id);
-    // console.log(id === item.id);
 
     if (id === item.id && shouldRenderChildren) {
       setShowChildren(true);
@@ -42,9 +41,13 @@ function TableItemRenderer({
     <div
       style={{
         display: "flex",
-        // alignItems: "center",
         paddingLeft: `${level * 5}px`,
-        // gap: "0.5rem",
+      }}
+      onClick={() => {
+        console.log("CHILD ITEM ID");
+        console.log(item.id);
+
+        toggleChildren(item.id);
       }}
     >
       {level < 3 && (
@@ -53,7 +56,7 @@ function TableItemRenderer({
         }`}</span>
       )}
       <li key={item.id} style={{ listStyle: "none" }}>
-        <div onClick={() => toggleChildren(item.id)}>
+        <div>
           {item.name}
           {showChildren && shouldRenderChildren && (
             <ul>
