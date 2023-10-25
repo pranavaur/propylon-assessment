@@ -25,10 +25,12 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // if (selectedId?.length > 0) {
-    //   const allData = []
-    //   setDataToShow();
-    // }
+    if (selectedId) {
+      console.log("selectedId " + selectedId);
+
+      const selectedData = data.filter((d) => d.parent_id === selectedId);
+      setDataToShow(selectedData);
+    }
   }, [selectedId]);
 
   return (
@@ -39,9 +41,7 @@ function App() {
         setSelectedContentIndex={setSelectedContentIndex}
       /> */}
       <TableOfContents data={data} setSelectedId={setSelectedId} />
-      {/* {dataToShow.map((d) => (
-        <MainContent selectedContent={d} />
-      ))} */}
+      <MainContent selectedContent={dataToShow} />
     </main>
   );
 }
